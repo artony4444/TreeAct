@@ -22,11 +22,11 @@ let error   = 1
 
 let info_no_roots = () => info ? [
     console.log(`add <root> to get started`),
-    console.log(`<root src="{app_location}"></root>`)
+    console.log(`<root src="{app_location}"></root>`),
 ] : 0
 
-let error_bad_location = (l) => error ? [
-    console.error(`<root> import fail at : ${l}`),
+let error_bad_location = (url, err) => error ? [
+    console.error(`fail to import <root> at ${url}`),
 ] : 0
 
 
@@ -34,6 +34,7 @@ let error_bad_location = (l) => error ? [
 
 
 var print = (...t) => console.log(...t)
+var render = (fs) => typeof fs == "function" ? fs() : fs
 
 let script; document.querySelectorAll(`script[${origin}]`).forEach((e) => { script = (e.src == import.meta.url) ? e : 0 })
 
@@ -44,11 +45,15 @@ let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
 roots.forEach((e) => {
     let url = base + e.getAttribute('src')
     import(url).then((m) => {
-        let app = m.default
+        let app = render(m.default)        
         e.append(document.createRange().createContextualFragment(app))
     })
-    .catch((err) => error_bad_location(url))
+    .catch((err) => {
+        if(err.message.includes("Failed to fetch dynamically imported module:")) error_bad_location(url, err)
+        else throw err;
+    })
 })
+
 
 
 
