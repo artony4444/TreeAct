@@ -2,7 +2,7 @@ export default `<script>
     
     
     
-    console.log("JS working!")
+    console.log("Welcome!")
     
     
     

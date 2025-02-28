@@ -33,11 +33,17 @@ let error_bad_location = (url, err) => error ? [
 /* ------------------------------------- */
 
 
-var print = (...t) => console.log(...t)
-var render = (fs) => typeof fs == "function" ? fs() : fs
+let print = (...t) => console.log(...t)
+let render = (fs) => typeof fs == "function" ? fs() : fs
+let dir = import.meta.url.substring(0, import.meta.url.lastIndexOf('/')+1)
 
+// globals
+let def = document.createElement("script"); 
+def.src = dir + "globals.js";
+document.head.prepend(def);
+
+// current script
 let script; document.querySelectorAll(`script[${origin}]`).forEach((e) => { script = (e.src == import.meta.url) ? e : 0 })
-
 let base = "/" + (script ? script.getAttribute(origin) : "");
 
 let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
