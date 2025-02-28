@@ -44,12 +44,13 @@ document.head.prepend(def);
 
 // current script
 let script; document.querySelectorAll(`script[${origin}]`).forEach((e) => { script = (e.src == import.meta.url) ? e : 0 })
-let base = "/" + (script ? script.getAttribute(origin) : "");
+let base = window.location.href + (script ? script.getAttribute(origin) : "");
 
 let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
 
 roots.forEach((e) => {
     let url = base + e.getAttribute('src')
+    console.log(url)
     import(url).then((m) => {
         let app = render(m.default)        
         e.append(document.createRange().createContextualFragment(app))
