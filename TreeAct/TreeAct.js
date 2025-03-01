@@ -38,14 +38,14 @@ let render = (fs) => typeof fs == "function" ? fs() : fs
 let lib_dir = import.meta.url.substring(0, import.meta.url.lastIndexOf('/')+1)
 
 // globals
-let def = document.createElement("script"); 
+let def = document.createElement("script");
 def.src = lib_dir + "globals.js";
 document.head.prepend(def);
 
 // current script
-let dir = window.location.pathname.replace("/index.html", "") // "" // (window.location)
+let dir = window.location.pathname.replace("/index.html", "")
 let script; document.querySelectorAll(`script[${origin}]`).forEach((e) => { script = (e.src == import.meta.url) ? e : 0 })
-let base = dir + "/" + (script ? script.getAttribute(origin) : "");
+let base = window.location.origin + dir + (script ? script.getAttribute(origin) : "");
 
 let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
 

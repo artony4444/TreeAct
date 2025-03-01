@@ -22,7 +22,7 @@ export default ({color="grey", child=""}={}) => `
     {
         filter: brightness(1.5);
         transform: scale(1.2);
-        box-shadow: 0 0 30px 0 ${color}, inset 0 0 5px 1px #00000053;
+        box-shadow: 0 0 1em 0 ${color}, inset 0 0 .1em .1em #00000053;
     }
     
 `)
