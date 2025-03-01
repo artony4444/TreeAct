@@ -26,7 +26,7 @@ let info_no_roots = () => info ? [
 ] : 0
 
 let error_bad_location = (url, err) => error ? [
-    console.error(`fail to import <root> at ${url}`),
+    console.error(`error importing <root> at ${url}`),
 ] : 0
 
 
@@ -51,7 +51,6 @@ let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
 
 roots.forEach((e) => {
     let url = base + e.getAttribute('src')
-    print(url)
     import(url).then((m) => {
         let app = render(m.default)        
         e.append(document.createRange().createContextualFragment(app))
