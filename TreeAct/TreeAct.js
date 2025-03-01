@@ -35,22 +35,23 @@ let error_bad_location = (url, err) => error ? [
 
 let print = (...t) => console.log(...t)
 let render = (fs) => typeof fs == "function" ? fs() : fs
-let dir = import.meta.url.substring(0, import.meta.url.lastIndexOf('/')+1)
+let lib_dir = import.meta.url.substring(0, import.meta.url.lastIndexOf('/')+1)
 
 // globals
 let def = document.createElement("script"); 
-def.src = dir + "globals.js";
+def.src = lib_dir + "globals.js";
 document.head.prepend(def);
 
 // current script
+let dir = window.location.pathname.replace("/index.html", "") // "" // (window.location)
 let script; document.querySelectorAll(`script[${origin}]`).forEach((e) => { script = (e.src == import.meta.url) ? e : 0 })
-let base = window.location.href + (script ? script.getAttribute(origin) : "");
+let base = dir + "/" + (script ? script.getAttribute(origin) : "");
 
 let roots = document.querySelectorAll(tag); !roots.length ? info_no_roots() : 0;
 
 roots.forEach((e) => {
     let url = base + e.getAttribute('src')
-    console.log(url)
+    print(url)
     import(url).then((m) => {
         let app = render(m.default)        
         e.append(document.createRange().createContextualFragment(app))
