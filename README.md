@@ -1,4 +1,4 @@
-# TreeAct
+# 🌲TreeAct
 TreeAct - HTML Components with 0 dependency
 * HTML frendly
 * JS frendly
