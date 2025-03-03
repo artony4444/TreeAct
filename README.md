@@ -13,7 +13,6 @@ TreeAct - HTML Components with 0 dependency
 `index.html`
 ```html
 <root src="App.js"></root>
-<script type="module" src="https://artony4444.github.io/TreeAct/TreeAct/TreeAct.js"></script>
 ```
 
 `App.js`
@@ -21,6 +20,14 @@ TreeAct - HTML Components with 0 dependency
 export default `
   <h1> hello world </h1>
 `
+```
+
+<br>
+
+## Import
+
+```html
+<script type="module" src="https://artony4444.github.io/TreeAct/TreeAct/TreeAct.js"></script>
 ```
 
 <br>
